@@ -95,7 +95,14 @@ conn.execute("""
 conn.execute("""
     CREATE OR REPLACE TEMP TABLE filter_words AS
     SELECT list(LOWER(TRIM(normalized_term))) as keyword_list
-    FROM read_csv_auto('illegal_terms_dictionary.csv')
+    FROM read_csv_auto(
+    'illegal_terms_dictionary_edit.csv',
+    delim=',',
+    header=True,
+    quote='"',
+    escape='"',
+    ignore_errors=True
+)
     WHERE normalized_term IS NOT NULL AND TRIM(normalized_term) != ''
 """)
 
