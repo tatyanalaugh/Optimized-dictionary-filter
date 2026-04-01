@@ -13,9 +13,10 @@ To personalize the query you have to change the following places in your code:
  COALESCE(Your_column_for_intersection, ''),
  AS name_of_your_column_for_intersection
  FROM read_parquet('your_dataset.parquet')
-
+```
+```python
 CREATE OR REPLACE TEMP TABLE filter_words AS
     SELECT list(LOWER(TRIM(name_of_your_column))) as keyword_list
     FROM read_csv_auto('your_dictionary.csv')
     WHERE name_of_your_column IS NOT NULL AND TRIM(name_of_your_column) != ''
-
+```
